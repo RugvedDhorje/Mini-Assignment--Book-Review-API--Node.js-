@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const Book = require("../models/book");
-// const Review = require("../models/review");
 const auth = require("../middleware/auth");
 const zod = require("zod");
 
-// POST /books – Add new book
+//* Zod validation for Book Data
 const bookSchema = zod.object({
   name: zod.string(),
   author: zod.string(),
   genre: zod.string(),
   rating: zod.number(),
 });
+
+//* Api to register a new book
 router.post("/create", auth, async (req, res) => {
   const body = req.body;
 
@@ -30,11 +31,10 @@ router.post("/create", auth, async (req, res) => {
   const newBook = new Book(body);
   await newBook.save();
 
-  //   const newBook = await Book.save(body);
   res.status(201).json(newBook);
 });
 
-// GET /books – With pagination & filters
+//* Get books With pagination & filters
 router.get("/allBooks", async (req, res) => {
   const { page = 1, limit = 10, author, genre } = req.query;
   const filter = {};
@@ -47,7 +47,7 @@ router.get("/allBooks", async (req, res) => {
   res.json(books);
 });
 
-// GET /books/:id – Book details + reviews + average rating
+//* Book details + reviews + average rating
 router.get("/:id", async (req, res) => {
   const book = await Book.findById(req.params.id).populate({
     path: "reviews",

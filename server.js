@@ -2,7 +2,7 @@ const express = require("express");
 const mainRouter = require("./routes/index");
 const app = express();
 const cors = require("cors");
-const connectDB = require("./connectDB");
+const connectDB = require("./config/connectDb");
 const PORT = process.env.PORT;
 
 app.use(cors());

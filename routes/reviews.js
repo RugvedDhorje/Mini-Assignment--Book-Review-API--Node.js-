@@ -4,7 +4,7 @@ const Review = require("../models/review");
 const Book = require("../models/book");
 const auth = require("../middleware/auth");
 
-// POST /books/:id/reviews – Submit review (1 per user per book)
+//* Submit review (1 per user per book)
 router.post("/books/:id/reviews", auth, async (req, res) => {
   const existing = await Review.findOne({
     user: req.user._id,
@@ -26,7 +26,7 @@ router.post("/books/:id/reviews", auth, async (req, res) => {
   res.status(201).json(review);
 });
 
-// PUT /reviews/:id – Update your review
+//* Update your review
 router.put("/update/:id", auth, async (req, res) => {
   const review = await Review.findById(req.params.id);
   console.log(review.user._id);
@@ -39,7 +39,7 @@ router.put("/update/:id", auth, async (req, res) => {
   res.json(review);
 });
 
-// DELETE /reviews/:id – Delete your review
+//* Delete your review
 router.delete("/delete/:id", auth, async (req, res) => {
   const review = await Review.findById(req.params.id);
 
