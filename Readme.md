@@ -93,6 +93,7 @@ curl "http://localhost:1100/search?q=book"
 {
 name: String,
 author: String,
+genre: String,
 reviews: [ObjectId] // References to Review
 }
 
@@ -102,7 +103,9 @@ reviews: [ObjectId] // References to Review
 
 {
 username: String,
-password: String // Hashed
+password: String ,// Hashed
+firstName: String,
+lastName: String
 }
 
 ---
