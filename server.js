@@ -3,6 +3,7 @@ const mainRouter = require("./routes/index");
 const app = express();
 const cors = require("cors");
 const connectDB = require("./connectDB");
+const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
@@ -12,7 +13,7 @@ app.use("/api", mainRouter);
 connectDB()
   .then(() => {
     console.log("Database Connected Successfully.....");
-    app.listen(1100, () => {
+    app.listen(PORT, () => {
       console.log("server connected Successfully");
     });
   })
